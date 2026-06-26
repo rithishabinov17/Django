@@ -1,0 +1,33 @@
+Blog/view.py
+def home(request):
+    return HttpResponse("Hello, this is my first Django app!")
+def about(request,id):
+    return HttpResponse(f"HELLO EVERYONE AND GIVEN id is:{id}")
+
+Blog/urls.py
+urlpatterns = [
+    path('home/', views.home),
+    path('about/<str:id>/', views.about),
+]
+
+myproject/setting.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # your apps
+    'blog',
+]
+
+myproject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('blog.urls')),   # ✅ BEST for home page
+]
+
